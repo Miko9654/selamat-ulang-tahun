@@ -1,0 +1,109 @@
+<html>
+<head>
+  <title>Selamat Ulang Tahun Isabela!</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 20px;
+    }
+    #pertanyaan {
+      font-size: 24px;
+      color: #333;
+    }
+    #jawaban {
+      padding: 10px;
+      font-size: 18px;
+    }
+    #video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+ }
+  </style>
+</head>
+<body>
+  <video autoplay loop muted id="video-background">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <h1>Selamat Ulang Tahun Isabela!</h1>
+  <img src="c:\Users\User\OneDrive\Documents\isabela1.jpg" alt="Foto Isabela">
+  <p>Semoga hari ulang tahun sayang ini menjadi hari yang spesial dan penuh kebahagiaan ,sehat selalu ya sayang ,panjang umur,dan dipermudahkan segala urusan </p>
+  <h1>Love You</h1>
+  <p id="pertanyaan"></p>
+  <input id="jawaban" type="text" placeholder="Tulis Jawabanmu disini...">
+  <button id="kirim">Kirim</button>
+  <div id="hasil"></div>
+  <button id="play-music">Play/Pause Musik</button>
+  <button id="love-you-too">Love You Too</button>
+  <button id="no-button" style="position: absolute;">NO</button>
+  <audio id="music" src="c:\Users\User\Downloads\happy birthday1.mp3" loop></audio>
+
+  <script>
+    const pertanyaan = [
+      'Apa nama kamu?',
+      'Berapa tanggal lahir kamu?',
+      'Kamu sayang sama miko?',
+      'Berapa tanggal jadian kalian?'
+    ];
+    let indexPertanyaan = 0;
+    const pertanyaanElement = document.getElementById('pertanyaan');
+    const jawabanElement = document.getElementById('jawaban');
+    const kirimElement = document.getElementById('kirim');
+    const hasilElement = document.getElementById('hasil');
+    const musicElement = document.getElementById('music');
+    const playMusicButton = document.getElementById('play-music');
+    const loveYouTooButton = document.getElementById('love-you-too');
+    const noButton = document.getElementById('no-button');
+
+    tampilkanPertanyaan();
+
+    kirimElement.addEventListener('click', () => {
+      const jawabanUser = jawabanElement.value;
+      hasilElement.innerHTML += `<p>Jawaban untuk pertanyaan ${indexPertanyaan + 1}: ${jawabanUser}</p>`;
+      jawabanElement.value = '';
+      indexPertanyaan++;
+      if (indexPertanyaan < pertanyaan.length) {
+        tampilkanPertanyaan();
+      } else {
+        pertanyaanElement.innerHTML = 'Sesi tanya jawab selesai!';
+        kirimElement.disabled = true;
+      }
+    });
+
+    playMusicButton.addEventListener('click', () => {
+      if (musicElement.paused) {
+        musicElement.play();
+      } else {
+        musicElement.pause();
+      }
+    });
+
+    loveYouTooButton.addEventListener('click', () => {
+      alert('I <3 U');
+    });
+
+    noButton.addEventListener('click', () => {
+      noButton.style.left = Math.floor(Math.random() * 300) + 'px';
+      noButton.style.top = Math.floor(Math.random() * 100) + 'px';
+    });
+
+    function tampilkanPertanyaan() {
+      pertanyaanElement.innerText = pertanyaan[indexPertanyaan];
+    }
+  </script>
+</body>
+</html>
